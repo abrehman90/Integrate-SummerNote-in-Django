@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="row">
+    <div class="col-sm-5">
+            <h4 class="text-center alert alert-info">Add New Data</h4>
+    <form method="post" action="">
+    {% csrf_token %}
+    {{show.as_p}}
+{#        {{ show.name }}#}
+{#        {{ show.email }}#}
+        {{ content | safe }}
+    <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    </div>
+    <div class="col-sm-6 offset-1">
+         <h4 class="text-center alert alert-info">All Data</h4>
+        <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for sh in data %}
+    <tr>
+      <th scope="row">{{ sh.id }}</th>
+      <td>{{sh.name}}</td>
+      <td>{{ sh.email }}</td>
+    <td><a href="{% url 'updatedata' sh.id %}" class="btn btn-warning btn-sm">Edit</a>
+        <form class="d-inline" action="{% url 'deletedata' sh.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+        </form>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+    </div>
+    </div>
+{#    <form method="post" class="needs-validation" novalidate>#}
+{#    {% csrf_token %}#}
+{#  <div class="form-row">#}
+{#    <div class="col-md-3 mb-3">#}
+{#      <label for="validationCustom01">Name</label>#}
+{#      <input type="text" class="form-control" name="firstname" id="validationCustom01" placeholder="Name"  required>#}
+{#      <div class="valid-feedback">#}
+{#        Looks good!#}
+{#      </div>#}
+{#    </div>#}
+{#      <div class="col-md-3 mb-3">#}
+{#      <label for="validationCustom02">Email</label>#}
+{#      <input type="email" class="form-control" name="email" id="validationCustom02" placeholder="Email"  required>#}
+{#      <div class="valid-feedback">#}
+{#        Looks good!#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#  <div class="form-row">#}
+{##}
+{#      <div class="col-md-3 mb-3">#}
+{#      <label for="validationCustom04">Phone Number</label>#}
+{#      <input type="number" class="form-control" name="phonenumber" id="validationCustom04" placeholder="Phone Number" value="+923" required>#}
+{#      <div class="invalid-feedback">#}
+{#        Please provide a valid Phone Number.#}
+{#      </div>#}
+{#    </div>#}
+{#    <div class="col-md-3 mb-3">#}
+{#      <label for="validationCustom03">City</label>#}
+{#      <input type="text" class="form-control" name="city" id="validationCustom03" placeholder="City" required>#}
+{#      <div class="invalid-feedback">#}
+{#        Please provide a valid city.#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#  <div class="form-group">#}
+{#    <div class="form-check">#}
+{#      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>#}
+{#      <label class="form-check-label" for="invalidCheck">#}
+{#        Agree to terms and conditions#}
+{#      </label>#}
+{#      <div class="invalid-feedback">#}
+{#        You must agree before submitting.#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#    <br>#}
+{#  <button style="margin-left: 100px" class="btn btn-primary" type="submit">Submit form</button>#}
+{#</form>#}
+{#    <script>#}
+{#// Example starter JavaScript for disabling form submissions if there are invalid fields#}
+{#(function() {#}
+{#  'use strict';#}
+{#  window.addEventListener('load', function() {#}
+{#    // Fetch all the forms we want to apply custom Bootstrap validation styles to#}
+{#    var forms = document.getElementsByClassName('needs-validation');#}
+{#    // Loop over them and prevent submission#}
+{#    var validation = Array.prototype.filter.call(forms, function(form) {#}
+{#      form.addEventListener('submit', function(event) {#}
+{#        if (form.checkValidity() === false) {#}
+{#          event.preventDefault();#}
+{#          event.stopPropagation();#}
+{#        }#}
+{#        form.classList.add('was-validated');#}
+{#      }, false);#}
+{#    });#}
+{#  }, false);#}
+{#})();#}
+{#</script>#}
+{% endblock %}
